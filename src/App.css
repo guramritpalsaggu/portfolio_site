@@ -675,13 +675,103 @@
   font-size: 0.9rem;
   border-top: 1px solid var(--border);
   margin-top: 4rem;
-  margin-top: 5rem;
-  padding: 2rem;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.85rem;
 }
 
+/* Responsive Design - Tablet and below (1024px) */
+@media (max-width: 1024px) {
+  .page {
+    width: min(1000px, 95vw);
+    padding-block: 3rem;
+  }
+
+  .navbar-content {
+    padding: 0 1.5rem;
+  }
+
+  .hero {
+    padding: 2.5rem;
+  }
+
+  .section {
+    margin-top: 3rem;
+  }
+}
+
+/* Tablet portrait and below (768px) */
+@media (max-width: 768px) {
+  .page {
+    width: 95vw;
+    padding-block: 2.5rem;
+  }
+
+  .navbar-content {
+    padding: 0 1.25rem;
+  }
+
+  .navbar-links {
+    gap: 2rem;
+  }
+
+  .hero {
+    padding: 2rem 1.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .hero h2 {
+    font-size: 1.2rem;
+  }
+
+  .hero-summary {
+    font-size: 1rem;
+  }
+
+  .icon-link {
+    width: 40px;
+    height: 40px;
+  }
+
+  .chain {
+    padding-left: 0.5rem;
+  }
+
+  .chain-item {
+    gap: 1.5rem;
+  }
+
+  .chain-connector {
+    width: 24px;
+  }
+
+  .chain-header {
+    padding: 1.25rem;
+  }
+
+  .chain-details {
+    padding: 0 1.25rem;
+  }
+
+  .chain-details.expanded {
+    padding: 1.25rem;
+  }
+
+  .skill-icons-grid {
+    gap: 0.75rem;
+  }
+
+  .publication-card {
+    padding: 1.25rem;
+  }
+
+  .education-minimal {
+    padding: 1.75rem;
+  }
+}
+
+/* Mobile devices (640px and below) */
 @media (max-width: 640px) {
   .navbar {
     padding: 1rem 0;
@@ -706,6 +796,11 @@
     overflow-x: auto;
     padding-bottom: 0.5rem;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .navbar-links::-webkit-scrollbar {
+    display: none;
   }
 
   .navbar-link {
@@ -716,16 +811,53 @@
   .navbar-resume-btn {
     width: 100%;
     justify-content: center;
+    font-size: 0.85rem;
+    padding: 0.55rem 1rem;
+  }
+
+  .page {
+    width: 100%;
+    padding: 1.5rem 1rem 2rem;
+    margin-bottom: 2rem;
   }
 
   .hero {
     padding: 2rem 1.5rem;
+    border-radius: 20px;
+    margin-bottom: 2.5rem;
   }
 
-  .hero-location {
-    justify-content: center;
+  .hero h1 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
   }
-}
+
+  .hero h2 {
+    font-size: 1.1rem;
+  }
+
+  .hero-summary {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .hero-icons {
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .icon-link {
+    width: 38px;
+    height: 38px;
+  }
+
+  .section {
+    margin-top: 2.5rem;
+    gap: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
 
   .chain {
     padding-left: 0.25rem;
@@ -737,6 +869,11 @@
 
   .chain-connector {
     width: 20px;
+  }
+
+  .chain-node {
+    width: 12px;
+    height: 12px;
   }
 
   .chain-header {
@@ -752,16 +889,33 @@
     justify-content: space-between;
   }
 
+  .chain-title {
+    font-size: 1rem;
+  }
+
   .chain-period {
     font-size: 0.8rem;
   }
 
+  .chain-company {
+    font-size: 0.9rem;
+  }
+
+  .chain-location {
+    font-size: 0.85rem;
+  }
+
   .chain-details {
     padding: 0 1rem;
+    font-size: 0.9rem;
   }
 
   .chain-details.expanded {
     padding: 1rem;
+  }
+
+  .chain-details ul {
+    padding-left: 1.25rem;
   }
 
   .skill-icons-grid {
@@ -777,6 +931,18 @@
     font-size: 1rem;
   }
 
+  .publication-card {
+    padding: 1rem;
+  }
+
+  .publication-title {
+    font-size: 1rem;
+  }
+
+  .publication-outlet {
+    font-size: 0.85rem;
+  }
+
   .education-minimal {
     flex-direction: column;
     padding: 1.5rem;
@@ -790,5 +956,59 @@
   .education-meta {
     text-align: left;
     width: 100%;
+  }
+
+  .footer {
+    padding: 2rem 1rem 1.5rem;
+    font-size: 0.85rem;
+    margin-top: 3rem;
+  }
+}
+
+/* Small mobile devices (480px and below) */
+@media (max-width: 480px) {
+  .hero {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.5rem, 10vw, 2rem);
+  }
+
+  .hero-icons {
+    gap: 0.5rem;
+  }
+
+  .icon-link {
+    width: 36px;
+    height: 36px;
+  }
+
+  .section-title {
+    font-size: 1.35rem;
+  }
+
+  .chain-header {
+    padding: 0.875rem;
+  }
+
+  .chain-details {
+    font-size: 0.875rem;
+  }
+
+  .skill-badge {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Large screens (1440px and above) */
+@media (min-width: 1440px) {
+  .page {
+    max-width: 1200px;
+  }
+
+  .navbar-content {
+    max-width: 1200px;
   }
 }
