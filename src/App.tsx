@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { ReactNode } from 'react'
 import './App.css'
 import {
@@ -5,174 +6,306 @@ import {
   education,
   experiences,
   hero,
-  highlights,
-  interests,
-  projects,
   publications,
   skills,
 } from './data/profile'
+import { LinkedInIcon, EmailIcon, PhoneIcon, GitHubIcon, LeetCodeIcon, StratascratchIcon, GoogleScholarIcon } from './components/Icons'
+import { SkillIcon } from './components/SkillIcons'
 
-function InfoPill({ label, value }: { label: string; value: string }) {
+function Section({ id, title, children }: { id?: string; title: string; children: ReactNode }) {
   return (
-    <div className="info-pill">
-      <span>{label}</span>
-      <strong>{value}</strong>
-    </div>
-  )
-}
-
-function Section({ title, subtitle, children }: { title: string; subtitle?: string; children: ReactNode }) {
-  return (
-    <section className="section">
-      <div className="section-header">
-        <div>
-          <p className="eyebrow">featured</p>
-          <h2>{title}</h2>
-        </div>
-        {subtitle && <p className="subtitle">{subtitle}</p>}
-      </div>
+    <section id={id} className="section">
+      <h2 className="section-title">{title}</h2>
       {children}
     </section>
   )
 }
 
+function Navbar() {
+  const navItems = [
+    { label: 'Experience', href: '#experience' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Publications', href: '#publications' },
+    { label: 'Education', href: '#education' },
+  ]
+
+  return (
+    <nav className="navbar">
+      <div className="navbar-content">
+        <a href="#" className="navbar-logo" onClick={(e) => {
+          e.preventDefault()
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }}>
+          <span className="navbar-logo-icon">G</span>
+        </a>
+        <div className="navbar-right">
+          <div className="navbar-links">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="navbar-link"
+                onClick={(e) => {
+                  e.preventDefault()
+                  const element = document.querySelector(item.href)
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  }
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+          <a 
+            href="/guramritpal_resume.pdf" 
+            download
+            className="navbar-resume-btn"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Resume
+          </a>
+        </div>
+      </div>
+    </nav>
+  )
+}
+
+function ExperienceItem({ experience, index, total }: { experience: typeof experiences[0]; index: number; total: number }) {
+  const [isExpanded, setIsExpanded] = useState(index === 0)
+
+  return (
+    <div className="chain-item">
+      <div className="chain-connector">
+        {index < total - 1 && <div className="chain-line"></div>}
+        <div className="chain-node"></div>
+      </div>
+      <div className="chain-content">
+        <div 
+          className={`chain-header ${isExpanded ? 'expanded' : ''}`}
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          <div className="chain-header-main">
+            <div>
+              <h3>{experience.role}</h3>
+              {experience.companyUrl ? (
+                <a 
+                  href={experience.companyUrl} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="chain-company"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {experience.company}
+                  <span className="link-arrow">↗</span>
+                </a>
+              ) : (
+                <p className="chain-company">{experience.company}</p>
+              )}
+            </div>
+            <p className="chain-location">{experience.location}</p>
+          </div>
+          <div className="chain-header-meta">
+            <span className="chain-period">{experience.period}</span>
+            <button className="expand-btn" aria-label={isExpanded ? 'Collapse' : 'Expand'}>
+              <svg 
+                width="20" 
+                height="20" 
+                viewBox="0 0 20 20" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2"
+                className={isExpanded ? 'expanded' : ''}
+              >
+                <path d="M5 7.5 L10 12.5 L15 7.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <div className={`chain-details ${isExpanded ? 'expanded' : ''}`}>
+          <ul className="chain-bullets">
+            {experience.bullets.map((bullet, i) => (
+              <li key={i}>{bullet}</li>
+            ))}
+          </ul>
+          <div className="chain-tags">
+            {experience.tags.map((tag) => (
+              <span key={tag} className="tag">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function App() {
   return (
-    <main className="page">
-      <header className="hero">
-        <div className="hero-meta">
-          <p className="eyebrow">Portfolio · 2025</p>
-          <p className="eyebrow">LinkedIn: <a href={contact.linkedin} target="_blank" rel="noreferrer" className="link-inline">{contact.linkedin.replace('https://www.', '')}</a></p>
-        </div>
+    <>
+      <Navbar />
+      <main className="page">
+        <header className="hero">
         <h1>{hero.name}</h1>
-        <h3>{hero.title}</h3>
+        <h2>{hero.title}</h2>
         <p className="hero-summary">{hero.summary[0]}</p>
-        <p className="hero-summary">{hero.summary[1]}</p>
-        <div className="hero-actions">
-          <a className="btn primary" href={contact.linkedin} target="_blank" rel="noreferrer">
-            View LinkedIn Profile
+        <div className="hero-icons">
+          <a 
+            href={contact.linkedin} 
+            target="_blank" 
+            rel="noreferrer" 
+            className="icon-link"
+            aria-label="LinkedIn"
+          >
+            <LinkedInIcon size={22} />
           </a>
-          <a className="btn ghost" href={`mailto:${contact.email}`}>
-            Get in Touch
+          <a 
+            href={`mailto:${contact.email}`}
+            className="icon-link"
+            aria-label="Email"
+          >
+            <EmailIcon size={22} />
           </a>
-        </div>
-        <div className="contact-grid">
-          <InfoPill label="Location" value={contact.location} />
-          <InfoPill label="Phone" value={contact.phone} />
-          <InfoPill label="Email" value={contact.email} />
-          <InfoPill label="LinkedIn" value={contact.linkedin.replace('https://www.linkedin.com/in/', '')} />
+          <a 
+            href={`tel:${contact.phone}`}
+            className="icon-link"
+            aria-label="Phone"
+          >
+            <PhoneIcon size={22} />
+          </a>
+          <a 
+            href={contact.github} 
+            target="_blank" 
+            rel="noreferrer" 
+            className="icon-link"
+            aria-label="GitHub"
+          >
+            <GitHubIcon size={22} />
+          </a>
+          <a 
+            href={contact.leetcode} 
+            target="_blank" 
+            rel="noreferrer" 
+            className="icon-link"
+            aria-label="LeetCode"
+          >
+            <LeetCodeIcon size={22} />
+          </a>
+          <a 
+            href={contact.stratascratch} 
+            target="_blank" 
+            rel="noreferrer" 
+            className="icon-link"
+            aria-label="Stratascratch"
+          >
+            <StratascratchIcon size={22} />
+          </a>
+          <a 
+            href={contact.scholar} 
+            target="_blank" 
+            rel="noreferrer" 
+            className="icon-link"
+            aria-label="Google Scholar"
+          >
+            <GoogleScholarIcon size={22} />
+          </a>
         </div>
       </header>
 
-      <section className="highlight-grid">
-        {highlights.map((item) => (
-          <article key={item.label}>
-            <p className="label">{item.label}</p>
-            <h4>{item.value}</h4>
-          </article>
-        ))}
-      </section>
-
-      <Section title="Work Experience" subtitle="Building dependable data & GenAI platforms end-to-end.">
-        <div className="stacked-cards">
-          {experiences.map((experience) => (
-            <article className="card" key={`${experience.company}-${experience.role}-${experience.period}`}>
-              <div className="card-header">
-                <div>
-                  <h3>{experience.company}</h3>
-                  <p>{experience.location}</p>
-                </div>
-                <div className="timeline">
-                  <strong>{experience.role}</strong>
-                  <span>{experience.period}</span>
-                </div>
-              </div>
-              <ul>
-                {experience.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
-              <div className="tag-row">
-                {experience.tags.map((tag) => (
-                  <span key={tag} className="tag">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </article>
+      <Section id="experience" title="Experience">
+        <div className="chain">
+          {experiences.map((experience, index) => (
+            <ExperienceItem 
+              key={`${experience.company}-${experience.role}-${experience.period}`}
+              experience={experience}
+              index={index}
+              total={experiences.length}
+            />
           ))}
         </div>
       </Section>
 
-      <Section title="Education" subtitle="Integrated dual-degree technologist grounded in research.">
-        <div className="education-card">
-          <div>
-            <h3>{education.school}</h3>
-            <p>{education.program}</p>
-          </div>
-          <div className="timeline">
-            <strong>{education.period}</strong>
-            <span>{education.cgpa}</span>
-          </div>
+      <Section id="skills" title="Skills">
+        <div className="skills-grid">
+          {skills.map((skill) => (
+            <div key={skill.label} className="skill-category">
+              <h3 className="skill-category-title">{skill.label}</h3>
+              <div className="skill-icons-grid">
+                {skill.items.map((item) => (
+                  <div key={item} className="skill-badge" title={item}>
+                    <SkillIcon name={item} />
+                    <span className="skill-name">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </Section>
 
-      <Section title="Publications & Articles" subtitle="Select work spanning encryption, analytics, and applied research.">
-        <div className="list-grid">
+      <Section id="publications" title="Publications & Articles">
+        <div className="publications-list">
           {publications.map((pub) => (
-            <a className="list-card" key={pub.title} href={pub.link} target="_blank" rel="noreferrer">
-              <div>
-                <h4>{pub.title}</h4>
-                <p>{pub.outlet}</p>
+            <a 
+              key={pub.title} 
+              href={pub.link} 
+              target="_blank" 
+              rel="noreferrer"
+              className="publication-item"
+            >
+              <div className="publication-content">
+                <h4 className="publication-title">{pub.title}</h4>
+                <p className="publication-outlet">{pub.outlet}</p>
+                {pub.citations && (
+                  <span className="publication-citations">{pub.citations} citations</span>
+                )}
               </div>
-              <span>↗</span>
+              <span className="publication-arrow">↗</span>
             </a>
           ))}
         </div>
       </Section>
 
-      <Section title="Projects" subtitle="Minimal, production-ready builds across HR, explainable AI, and mental health.">
-        <div className="list-grid">
-          {projects.map((project) => (
-            <article className="list-card" key={project.name}>
-              <div>
-                <h4>{project.name}</h4>
-                <p>{project.context}</p>
-              </div>
-              <p>{project.summary}</p>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      <Section title="Skills & Platform Stack">
-        <div className="skills-grid">
-          {skills.map((skill) => (
-            <article className="skill-card" key={skill.label}>
-              <p className="label">{skill.label}</p>
-              <p>{skill.items.join(' · ')}</p>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      <Section title="Interests" subtitle="Outside of code, I recharge through movement and exploration.">
-        <div className="interests">
-          {interests.map((interest) => (
-            <span className="tag" key={interest}>
-              {interest}
-            </span>
-          ))}
+      <Section id="education" title="Education">
+        <div className="education-minimal">
+          <div className="education-main">
+            <div className="education-info">
+              {education.schoolUrl ? (
+                <a 
+                  href={education.schoolUrl} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="education-school-link"
+                >
+                  <h3>
+                    {education.school}
+                    <span className="link-arrow">↗</span>
+                  </h3>
+                </a>
+              ) : (
+                <h3>{education.school}</h3>
+              )}
+              <p>{education.program}</p>
+            </div>
+          </div>
+          <div className="education-meta">
+            <span>{education.period}</span>
+            <span>{education.cgpa}</span>
+          </div>
         </div>
       </Section>
 
       <footer className="footer">
-        <p>
-          Built with React · Crafted for recruiters & collaborators. This snapshot reflects the latest professional narrative mirrored
-          from LinkedIn and ongoing engagements.
-        </p>
+        <p>&copy; {new Date().getFullYear()} {hero.name}. All rights reserved.</p>
       </footer>
-    </main>
+      </main>
+    </>
   )
 }
 

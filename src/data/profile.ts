@@ -1,8 +1,9 @@
 export const hero = {
-  name: 'Guramritpal Singh Saggu',
+  name: 'Guramritpal Saggu',
   title: 'Senior Software Engineer',
+  location: 'Bangalore, India',
   summary: [
-    'Senior Software Engineer with 5+ years experience designing and scaling data engineering and ML platforms, delivering reliable, production-grade systems that accelerate business value.',
+    '5+ years experience designing and scaling data engineering and ML platforms, delivering reliable, production-grade systems that accelerate business value.',
     'Proven leader in platform development and system design, specializing in building and optimizing end-to-end data pipelines and ML solutions that drive organizational efficiency, compliance, and innovation.',
   ],
 }
@@ -12,7 +13,10 @@ export const contact = {
   email: 'guramritpalsaggu@gmail.com',
   phone: '+91 99885 49219',
   linkedin: 'https://www.linkedin.com/in/guramritpal',
-  github: 'https://github.com/guramritpal',
+  github: 'https://github.com/guramritpalsaggu',
+  leetcode: 'https://leetcode.com/guramritpal',
+  stratascratch: 'https://platform.stratascratch.com/user/stallion',
+  scholar: 'https://scholar.google.com/citations?user=BltHsyMAAAAJ&hl=en',
 }
 
 export const highlights = [
@@ -25,6 +29,7 @@ export const highlights = [
 export const experiences = [
   {
     company: 'Junglee Games',
+    companyUrl: 'https://www.jungleegames.com/',
     role: 'Data Engineer III',
     period: 'July 2025 – Present',
     location: 'Bangalore, India',
@@ -37,6 +42,7 @@ export const experiences = [
   },
   {
     company: 'Junglee Games',
+    companyUrl: 'https://www.jungleegames.com/',
     role: 'Data Engineer II',
     period: 'Nov 2023 – June 2025',
     location: 'Bangalore, India',
@@ -51,6 +57,7 @@ export const experiences = [
   },
   {
     company: 'Slice',
+    companyUrl: 'https://slice.bank.in/',
     role: 'Software Engineer II',
     period: 'May 2023 – Nov 2023',
     location: 'Bangalore, India',
@@ -63,6 +70,7 @@ export const experiences = [
   },
   {
     company: 'Slice',
+    companyUrl: 'https://slice.bank.in/',
     role: 'Software Engineer I',
     period: 'Jan 2022 – April 2023',
     location: 'Bangalore, India',
@@ -74,6 +82,7 @@ export const experiences = [
   },
   {
     company: 'Goldman Sachs',
+    companyUrl: 'https://www.goldmansachs.com/',
     role: 'Summer Analyst',
     period: 'Jun 2021 – Aug 2021',
     location: 'Bangalore, India',
@@ -84,6 +93,7 @@ export const experiences = [
   },
   {
     company: 'Rakuten',
+    companyUrl: 'https://www.rakuten.com/',
     role: 'Technical Intern',
     period: 'Feb 2021 – May 2021',
     location: 'Bangalore, India',
@@ -94,6 +104,7 @@ export const experiences = [
   },
   {
     company: 'Hackerearth',
+    companyUrl: 'https://www.hackerearth.com/',
     role: 'Subject Matter Expert',
     period: 'Mar 2020 – Jun 2022',
     location: 'Remote',
@@ -104,6 +115,7 @@ export const experiences = [
   },
   {
     company: 'CoulombAI',
+    companyUrl: 'https://www.coulomb.ai/',
     role: 'Software Engineer Intern',
     period: 'Jun 2020 – Mar 2021',
     location: 'Remote',
@@ -116,6 +128,7 @@ export const experiences = [
 
 export const education = {
   school: 'Indian Institute of Information Technology & Management, Gwalior',
+  schoolUrl: 'https://www.iiitm.ac.in/index.php/en/',
   program: 'Integrated B.Tech + M.Tech in Information Technology',
   period: 'Jul 2017 – Jun 2022',
   cgpa: 'CGPA: 8.64 / 10',
@@ -125,27 +138,30 @@ export const publications = [
   {
     title: 'PII-SMT: Client-Side Field-Level Encryption/Decryption for Apache Kafka',
     outlet: 'Medium Blog, 2025',
-    link: 'https://medium.com',
+    link: 'https://jungleegames.medium.com/pii-smt-client-side-field-level-encryption-decryption-for-apache-kafka-part-1-9ade835518a2',
   },
   {
     title: 'Unlocking Data Potential with Starburst: Efficiency, Speed & Cost-Effectiveness',
     outlet: 'Success Story, 2024',
-    link: 'https://starburst.io',
+    link: 'https://www.starburst.io/resources/junglee-games/',
   },
   {
     title: 'Hybrid Deep Convolutional Neural Network Model for Diagnosis of Pneumonia',
     outlet: 'Research Paper, 2024',
-    link: 'https://scholar.google.com',
+    link: 'https://link.springer.com/article/10.1007/s00521-023-09147-y',
+    citations: 15,
   },
   {
     title: 'DepressNet: Multimodal Hierarchical Attention Model for Depression Detection',
     outlet: 'Research Paper, 2022',
-    link: 'https://scholar.google.com',
+    link: 'https://doi.org/10.36224/ijes.150104',
+    citations: 36,
   },
   {
     title: 'Efficient Classification for Age and Gender of Unconstrained Face Images',
     outlet: 'Research Paper, 2021',
-    link: 'https://scholar.google.com',
+    link: 'https://link.springer.com/chapter/10.1007/978-981-16-4103-9_2',
+    citations: 3,
   },
 ]
 
